@@ -2,10 +2,10 @@ package v1
 
 import (
 	"fmt"
-	"gin_test/first/models"
-	"gin_test/first/pkg/e"
-	"gin_test/first/pkg/setting"
-	"gin_test/first/pkg/util"
+	"github.com/DevOpserzhao/ops_gin/first/models"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/e"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/util"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"

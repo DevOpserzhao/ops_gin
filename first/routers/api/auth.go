@@ -1,14 +1,14 @@
 package api
 
 import (
-	"gin_test/first/pkg/logging"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/logging"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 
 	"net/http"
-	"gin_test/first/models"
-	"gin_test/first/pkg/e"
-	"gin_test/first/pkg/util"
+	"github.com/DevOpserzhao/ops_gin/first/models"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/e"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/util"
 )
 
 type auth struct {

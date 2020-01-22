@@ -1,8 +1,9 @@
 package jwt
 
 import (
-	"gin_test/first/pkg/e"
-	"gin_test/first/pkg/util"
+	//"gin_test/first/pkg/e"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/e"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/util"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
@@ -12,6 +13,8 @@ func JWT() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var code int
 		var data interface{}
+
+
 
 		code = e.SUCCESS
 		token := c.Query("token")

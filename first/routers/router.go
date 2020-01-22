@@ -1,13 +1,13 @@
 package routers
 
 import (
-	"gin_test/first/middleware/jwt"
-	"gin_test/first/pkg/setting"
-	"gin_test/first/routers/api"
-	v1 "gin_test/first/routers/api/v1"
+	"github.com/DevOpserzhao/ops_gin/first/middleware/jwt"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
+	"github.com/DevOpserzhao/ops_gin/first/routers/api"
+	v1 "github.com/DevOpserzhao/ops_gin/first/routers/api/v1"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-    _ "gin_test/first/docs"
+    _ "github.com/DevOpserzhao/ops_gin/first/docs"
 	"github.com/gin-gonic/gin"
 )
 
