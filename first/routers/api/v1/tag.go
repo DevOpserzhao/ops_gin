@@ -32,16 +32,23 @@ func GetTags(c *gin.Context) {
 
 	code := e.SUCCESS
 
-	data["lists"] = models.GetTags(util.GetPage(c), setting.PageSize, maps)
+	data["lists"] = models.GetTags(util.GetPage(c), setting.AppSetting.PageSize, maps)
 	data["total"] = models.GetTagTotal(maps)
 
 	fmt.Printf("maps=%v\n", maps)
-
+	fmt.Printf("data=%v\n", data)
 	c.JSON(http.StatusOK, gin.H{
 		"code": code,
 		"msg":  e.GetMsg(code),
 		"data": data,
 	})
+	//c.YAML(http.StatusOK, gin.H{
+	//		"code": code,
+	//		"msg":  e.GetMsg(code),
+	//		"data": data,
+	//	})
+
+	//c.YAML(http.StatusOK, gin.H{"message": code, "status": http.StatusOK})
 }
 
 // @Summary 新增文章标签

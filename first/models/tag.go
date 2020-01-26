@@ -9,6 +9,7 @@ type Tag struct {
 	State      int    `json:"state"`
 }
 
+//返回值为切片
 func GetTags(pageNum int, pageSize int, maps interface{}) (tags []Tag) {
 	db.Where(maps).Offset(pageNum).Limit(pageSize).Find(&tags)
 

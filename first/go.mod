@@ -3,6 +3,7 @@ module github.com/DevOpserzhao/ops_gin/first
 go 1.13
 
 require (
+	github.com/EDDYCJY/go-gin-example v0.0.0-20191007083155-a98c25f2172a
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/astaxie/beego v1.12.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
@@ -24,7 +25,7 @@ require (
 	golang.org/x/net v0.0.0-20200114155413-6afb5195e5aa // indirect
 	golang.org/x/sys v0.0.0-20200121082415-34d275377bf9 // indirect
 	golang.org/x/tools v0.0.0-20200122042241-dc16b66866f1 // indirect
-	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
+	gopkg.in/ini.v1 v1.51.1 // indirect
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )

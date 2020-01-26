@@ -6,8 +6,10 @@ import (
 	"github.com/DevOpserzhao/ops_gin/first/routers"
 	"log"
 
-	"syscall"
+	"github.com/DevOpserzhao/ops_gin/first/models"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/logging"
 	"github.com/fvbock/endless"
+	"syscall"
 )
 
 func main() {
@@ -23,13 +25,15 @@ func main() {
 	//
 	//s.ListenAndServe()
 
+	setting.Setup()
+	models.Setup()
 
-
-
-	endless.DefaultReadTimeOut = setting.ReadTimeout
-	endless.DefaultWriteTimeOut = setting.WriteTimeout
+	logging.Setup()
+	//
+	endless.DefaultReadTimeOut = setting.ServerSetting.ReadTimeout
+	endless.DefaultWriteTimeOut = setting.ServerSetting.WriteTimeout
 	endless.DefaultMaxHeaderBytes = 1 << 20
-	endPoint := fmt.Sprintf(":%d", setting.HTTPPort)
+	endPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
 
 	server := endless.NewServer(endPoint, routers.InitRouter())
 	server.BeforeBegin = func(add string) {
@@ -40,6 +44,5 @@ func main() {
 	if err != nil {
 		log.Printf("Server err: %v", err)
 	}
-
 
 }

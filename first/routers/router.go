@@ -1,19 +1,18 @@
 package routers
 
 import (
+	_ "github.com/DevOpserzhao/ops_gin/first/docs"
 	"github.com/DevOpserzhao/ops_gin/first/middleware/jwt"
 	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
 	"github.com/DevOpserzhao/ops_gin/first/routers/api"
 	v1 "github.com/DevOpserzhao/ops_gin/first/routers/api/v1"
+	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-    _ "github.com/DevOpserzhao/ops_gin/first/docs"
-	"github.com/gin-gonic/gin"
 )
 
 func InitRouter() *gin.Engine {
 	r := gin.New()
-
 
 	r.Use(gin.Logger())
 
@@ -24,15 +23,11 @@ func InitRouter() *gin.Engine {
 			"message": "test",
 		})
 	})
-	gin.SetMode(setting.RunMode)
-
-
+	gin.SetMode(setting.ServerSetting.RunMode)
 
 	r.GET("/auth", api.GetAuth)
 	apiv1 := r.Group("/api/v1")
 	apiv1.Use(jwt.JWT())
-
-
 
 	{
 		//获取标签列表
@@ -44,7 +39,6 @@ func InitRouter() *gin.Engine {
 		//删除指定标签
 		apiv1.DELETE("/tags/:id", v1.DeleteTag)
 
-
 		//获取文章列表
 		apiv1.GET("/articles", v1.GetArticles)
 		//获取指定文章
@@ -55,8 +49,6 @@ func InitRouter() *gin.Engine {
 		apiv1.PUT("/articles/:id", v1.EditArticle)
 		//删除指定文章
 		apiv1.DELETE("/articles/:id", v1.DeleteArticle)
-
-
 
 	}
 

@@ -2,7 +2,7 @@ package models
 
 type Article struct {
 	Model
-
+	//gorm.Model
 	TagID int `json:"tag_id" gorm:"index"`
 	Tag   Tag `json:"tag"`
 
@@ -37,6 +37,7 @@ func GetArticles(pageNum int, pageSize int, maps interface{}) (articles []Articl
 	return
 }
 
+//gorm 外键关联查询
 func GetArticle(id int) (article Article) {
 	db.Where("id = ?", id).First(&article)
 	db.Model(&article).Related(&article.Tag)
