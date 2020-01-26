@@ -2,16 +2,20 @@ package main
 
 import (
 	"fmt"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
-	"github.com/DevOpserzhao/ops_gin/first/routers"
-	"log"
-
 	"github.com/DevOpserzhao/ops_gin/first/models"
 	"github.com/DevOpserzhao/ops_gin/first/pkg/logging"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
+	"github.com/DevOpserzhao/ops_gin/first/routers"
 	"github.com/fvbock/endless"
+	"log"
 	"syscall"
 )
 
+func init() {
+	setting.Setup()
+	models.Setup()
+	logging.Setup()
+}
 func main() {
 	//router := routers.InitRouter()
 	//
@@ -25,10 +29,6 @@ func main() {
 	//
 	//s.ListenAndServe()
 
-	setting.Setup()
-	models.Setup()
-
-	logging.Setup()
 	//
 	endless.DefaultReadTimeOut = setting.ServerSetting.ReadTimeout
 	endless.DefaultWriteTimeOut = setting.ServerSetting.WriteTimeout
