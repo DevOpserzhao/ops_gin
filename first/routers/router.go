@@ -4,11 +4,13 @@ import (
 	_ "github.com/DevOpserzhao/ops_gin/first/docs"
 	"github.com/DevOpserzhao/ops_gin/first/middleware/jwt"
 	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/upload"
 	"github.com/DevOpserzhao/ops_gin/first/routers/api"
 	v1 "github.com/DevOpserzhao/ops_gin/first/routers/api/v1"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"net/http"
 )
 
 func InitRouter() *gin.Engine {
@@ -26,6 +28,9 @@ func InitRouter() *gin.Engine {
 	gin.SetMode(setting.ServerSetting.RunMode)
 
 	r.GET("/auth", api.GetAuth)
+	r.POST("/upload", api.UploadImage)
+	r.StaticFS("/upload/images", http.Dir(upload.GetImageFullPath()))
+
 	apiv1 := r.Group("/api/v1")
 	apiv1.Use(jwt.JWT())
 
