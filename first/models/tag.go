@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"github.com/jinzhu/gorm"
 )
 
@@ -49,6 +50,7 @@ func GetTags(pageNum int, pageSize int, maps interface{}) ([]Tag, error) {
 		err  error
 	)
 
+	fmt.Printf("model tag maps=%v\n\n", maps)
 	if pageSize > 0 && pageNum > 0 {
 		err = db.Where(maps).Find(&tags).Offset(pageNum).Limit(pageSize).Error
 	} else {

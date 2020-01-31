@@ -1,19 +1,16 @@
 package tag_service
 
 import (
-	"encoding/json"
+	"fmt"
+	"github.com/360EntSecGroup-Skylar/excelize"
 	"github.com/DevOpserzhao/ops_gin/first/models"
 	"github.com/DevOpserzhao/ops_gin/first/pkg/file"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/gredis"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/logging"
-	"github.com/DevOpserzhao/ops_gin/first/service/cache_service"
+	_ "github.com/DevOpserzhao/ops_gin/first/service/cache_service"
 	"github.com/EDDYCJY/go-gin-example/pkg/export"
+	"github.com/tealeg/xlsx"
 	"io"
 	"strconv"
 	"time"
-
-	"github.com/360EntSecGroup-Skylar/excelize"
-	"github.com/tealeg/xlsx"
 )
 
 type Tag struct {
@@ -60,32 +57,34 @@ func (t *Tag) Count() (int, error) {
 
 func (t *Tag) GetAll() ([]models.Tag, error) {
 	var (
-		tags, cacheTags []models.Tag
+		tags []models.Tag
+		//tags, cacheTags []models.Tag
 	)
 
-	cache := cache_service.Tag{
-		State: t.State,
-
-		PageNum:  t.PageNum,
-		PageSize: t.PageSize,
-	}
-	key := cache.GetTagsKey()
-	if gredis.Exists(key) {
-		data, err := gredis.Get(key)
-		if err != nil {
-			logging.Info(err)
-		} else {
-			json.Unmarshal(data, &cacheTags)
-			return cacheTags, nil
-		}
-	}
+	//cache := cache_service.Tag{
+	//	State: t.State,
+	//
+	//	PageNum:  t.PageNum,
+	//	PageSize: t.PageSize,
+	//}
+	//key := cache.GetTagsKey()
+	//fmt.Printf("tag_service key=%v\n\n",key)
+	//if gredis.Exists(key) {
+	//	data, err := gredis.Get(key)
+	//	if err != nil {
+	//		logging.Info(err)
+	//	} else {
+	//		json.Unmarshal(data, &cacheTags)
+	//		return cacheTags, nil
+	//	}
+	//}
 
 	tags, err := models.GetTags(t.PageNum, t.PageSize, t.getMaps())
 	if err != nil {
 		return nil, err
 	}
 
-	gredis.Set(key, tags, 3600)
+	//gredis.Set(key, tags, 3600)
 	return tags, nil
 }
 
@@ -175,6 +174,6 @@ func (t *Tag) getMaps() map[string]interface{} {
 	if t.State >= 0 {
 		maps["state"] = t.State
 	}
-
+	fmt.Printf("tag_service maps=%v\n\n", maps)
 	return maps
 }
