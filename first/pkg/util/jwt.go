@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
@@ -12,7 +13,7 @@ var jwtSecret = []byte(setting.AppSetting.JwtSecret)
 
 type Claims struct {
 	Username string `json:"username"`
-	Password string `json:"password"`
+	//Password string `json:"password"`
 	jwt.StandardClaims
 }
 
@@ -22,7 +23,7 @@ func GenerateToken(username, password string) (string, error) {
 
 	claims := Claims{
 		username,
-		password,
+		//password,
 		jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 			Issuer:    "gin-blog",
@@ -39,9 +40,12 @@ func ParseToken(token string) (*Claims, error) {
 	tokenClaims, err := jwt.ParseWithClaims(token, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return jwtSecret, nil
 	})
-
+	fmt.Printf("tokenClaims=%v\n\n\n------\n\n", tokenClaims)
+	fmt.Printf("claims1=%v\n\n\n------\n\n", tokenClaims.Claims)
+	fmt.Printf("claims2=%v\n\n\n------\n\n", tokenClaims.Claims.(*Claims))
 	if tokenClaims != nil {
 		if claims, ok := tokenClaims.Claims.(*Claims); ok && tokenClaims.Valid {
+
 			return claims, nil
 		}
 	}

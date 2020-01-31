@@ -1,20 +1,20 @@
 package v1
 
 import (
+	"github.com/DevOpserzhao/ops_gin/first/pkg/app"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/e"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
+	"github.com/DevOpserzhao/ops_gin/first/pkg/util"
+	"github.com/DevOpserzhao/ops_gin/first/service/article_service"
+	"github.com/EDDYCJY/go-gin-example/pkg/qrcode"
+	"github.com/EDDYCJY/go-gin-example/service/tag_service"
+
 	"net/http"
 
 	"github.com/astaxie/beego/validation"
 	"github.com/boombuler/barcode/qr"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
-
-	"github.com/EDDYCJY/go-gin-example/pkg/app"
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
-	"github.com/EDDYCJY/go-gin-example/pkg/qrcode"
-	"github.com/EDDYCJY/go-gin-example/pkg/setting"
-	"github.com/EDDYCJY/go-gin-example/pkg/util"
-	"github.com/EDDYCJY/go-gin-example/service/article_service"
-	"github.com/EDDYCJY/go-gin-example/service/tag_service"
 )
 
 // @Summary Get a single article
