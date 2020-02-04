@@ -6,7 +6,6 @@ import (
 	client_go "github.com/DevOpserzhao/ops_gin/first/pkg/client-go"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
-	"k8s.io/client-go/util/retry"
 	"net/http"
 )
 
@@ -45,11 +44,11 @@ func SetDeployment(c *gin.Context) {
 
 	replica := com.StrTo(c.Query("replica")).MustInt()
 	image := com.StrTo(c.Query("image")).String()
-	retryErr := retry.RetryOnConflict(retry.DefaultRetry, func() error {
-		updateErr := client_go.SetDeployment(name, DeploymentName, int32(replica), image)
-		return updateErr
-	})
-
+	//retryErr := retry.RetryOnConflict(retry.DefaultRetry, func() error {
+	//	updateErr := client_go.SetDeployment(name, DeploymentName, int32(replica), image)
+	//	return updateErr
+	//})
+	retryErr := client_go.Deploy(name, DeploymentName, int32(replica), image)
 	if retryErr != nil {
 		panic(fmt.Errorf("Update failed: %v", retryErr))
 		appD.Response(http.StatusOK, 5000, "Update failed")

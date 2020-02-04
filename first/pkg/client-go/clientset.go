@@ -4,10 +4,12 @@ import (
 	"flag"
 	"fmt"
 	appv1 "k8s.io/api/apps/v1"
+	apiv1 "k8s.io/api/core/v1"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/util/retry"
 	"os"
 	"path/filepath"
 )
@@ -93,7 +95,13 @@ func GetDeployment(NameSpace string, DeploymentName string) (*appv1.Deployment, 
 func int32Ptr(i int32) *int32 { return &i }
 
 func SetDeployment(NameSpace string, DeploymentName string, Replicas int32, Image string) error {
+
+	if NameSpace != "" {
+		NameSpace = apiv1.NamespaceDefault
+		fmt.Printf("namesp=%v\n", NameSpace)
+	}
 	deploymentsClient := ClientSetConn.AppsV1().Deployments(NameSpace)
+
 	result, getErr := deploymentsClient.Get(DeploymentName, metav1.GetOptions{})
 	if getErr != nil {
 		panic(fmt.Errorf("Failed to get latest version of Deployment: %v", getErr))
@@ -107,4 +115,12 @@ func SetDeployment(NameSpace string, DeploymentName string, Replicas int32, Imag
 	_, updateErr := deploymentsClient.Update(result)
 
 	return updateErr
+}
+
+func Deploy(name string, DeploymentName string, replica int32, image string) error {
+	return retry.RetryOnConflict(retry.DefaultRetry, func() error {
+		updateErr := SetDeployment(name, DeploymentName, int32(replica), image)
+		return updateErr
+
+	})
 }
