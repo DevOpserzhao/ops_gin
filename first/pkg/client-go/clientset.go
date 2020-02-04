@@ -42,13 +42,22 @@ func Setup() {
 
 }
 
-func GetNameSpaces() ([]v1.Namespace, error) {
+//func GetNameSpaces() ([]v1.Namespace, error) {
+//	ns, err := ClientSetConn.CoreV1().Namespaces().List(metav1.ListOptions{})
+//	if err != nil {
+//		panic(err)
+//	}
+//	nss := ns.Items
+//	return nss, err
+//
+//}
+
+func GetNameSpaces() (*v1.NamespaceList, error) {
 	ns, err := ClientSetConn.CoreV1().Namespaces().List(metav1.ListOptions{})
 	if err != nil {
 		panic(err)
 	}
-	nss := ns.Items
-	return nss, err
+	return ns, err
 
 }
 
