@@ -52,7 +52,7 @@ func Setup() {
 //
 //}
 
-func GetNameSpaces() (*v1.NamespaceList, error) {
+func GetNameSpaces() (*apiv1.NamespaceList, error) {
 	ns, err := ClientSetConn.CoreV1().Namespaces().List(metav1.ListOptions{})
 	if err != nil {
 		panic(err)
@@ -61,7 +61,7 @@ func GetNameSpaces() (*v1.NamespaceList, error) {
 
 }
 
-func GetNameSpace(NameSpace string) (*v1.Namespace, error) {
+func GetNameSpace(NameSpace string) (*apiv1.Namespace, error) {
 	ns, err := ClientSetConn.CoreV1().Namespaces().Get(NameSpace, metav1.GetOptions{})
 	if err != nil {
 		panic(err)
