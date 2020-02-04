@@ -52,6 +52,7 @@ func SetDeployment(c *gin.Context) {
 
 	if retryErr != nil {
 		panic(fmt.Errorf("Update failed: %v", retryErr))
+		appD.Response(http.StatusOK, 5000, "Update failed")
 	}
 
 	data["Deployment"] = "Namespace"
