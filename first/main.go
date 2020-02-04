@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/DevOpserzhao/ops_gin/first/models"
+	client_go "github.com/DevOpserzhao/ops_gin/first/pkg/client-go"
 	"github.com/DevOpserzhao/ops_gin/first/pkg/gredis"
 
 	"github.com/DevOpserzhao/ops_gin/first/pkg/logging"
@@ -18,6 +19,7 @@ func init() {
 	models.Setup()
 	logging.Setup()
 	gredis.Setup()
+	client_go.Setup()
 }
 func main() {
 	//router := routers.InitRouter()
