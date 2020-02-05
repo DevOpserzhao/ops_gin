@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	client_go "github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/client-go"
+	clientgo "github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/client-go"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/logging"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/setting"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/routers"
@@ -14,7 +14,7 @@ import (
 func init() {
 	setting.Setup()
 	logging.Setup()
-	client_go.Setup()
+	clientgo.Setup()
 }
 func main() {
 	//router := routers.InitRouter()
