@@ -1,15 +1,14 @@
 package api
 
 import (
+	"github.com/DevOpserzhao/ops_gin/first/pkg/app"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/e"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/util"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/service/auth_service"
 	"net/http"
 
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-
-	"github.com/EDDYCJY/go-gin-example/pkg/app"
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
-	"github.com/EDDYCJY/go-gin-example/pkg/util"
-	"github.com/EDDYCJY/go-gin-example/service/auth_service"
 )
 
 type auth struct {

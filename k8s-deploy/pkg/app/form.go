@@ -1,11 +1,10 @@
 package app
 
 import (
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/e"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"net/http"
-
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
 )
 
 // BindAndValid binds and validates data

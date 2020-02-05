@@ -2,10 +2,11 @@ package upload
 
 import (
 	"fmt"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/file"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/logging"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/util"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/file"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/logging"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/setting"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/util"
+
 	"log"
 	"mime/multipart"
 	"os"

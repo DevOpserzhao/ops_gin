@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/DevOpserzhao/ops_gin/first/pkg/logging"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/logging"
 	"github.com/astaxie/beego/validation"
 )
 

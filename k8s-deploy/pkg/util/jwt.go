@@ -1,11 +1,10 @@
 package util
 
 import (
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/setting"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
-
-	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
 )
 
 var jwtSecret = []byte(setting.AppSetting.JwtSecret)

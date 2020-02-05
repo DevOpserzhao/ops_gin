@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	client_go "github.com/DevOpserzhao/ops_gin/k8s-dep/pkg/client-go"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/logging"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
-	"github.com/DevOpserzhao/ops_gin/first/routers"
+	client_go "github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/client-go"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/logging"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/setting"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/routers"
 	"github.com/fvbock/endless"
 	"log"
 	"syscall"

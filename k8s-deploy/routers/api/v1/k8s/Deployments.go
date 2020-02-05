@@ -2,8 +2,8 @@ package k8s
 
 import (
 	"fmt"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/app"
-	client_go "github.com/DevOpserzhao/ops_gin/first/pkg/client-go"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/app"
+	client_go "github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/client-go"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
 	"net/http"

@@ -1,10 +1,9 @@
 package util
 
 import (
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/setting"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
-
-	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
 )
 
 func GetPage(c *gin.Context) int {

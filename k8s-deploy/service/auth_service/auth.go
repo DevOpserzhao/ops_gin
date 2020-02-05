@@ -1,7 +1,5 @@
 package auth_service
 
-
-
 type Auth struct {
 	Username string
 	Password string
@@ -12,9 +10,8 @@ type Auth struct {
 //}
 
 func (a *Auth) Check() (bool, error) {
-	if a.Username != "root" && a.Password !="123456" ()
+	if a.Username != "root" && a.Password != nil() {
+		return false, nil
+	}
 
-	return false, nil
 }
-
-

@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/DevOpserzhao/ops_gin/first/pkg/e"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/e"
 	"github.com/gin-gonic/gin"
 )
 
