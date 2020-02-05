@@ -1,7 +1,7 @@
 package routers
 
 import (
-	_ "github.com/DevOpserzhao/ops_gin/first/docs"
+	_ "github.com/DevOpserzhao/ops_gin/k8s-deploy/docs"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/middleware/jwt"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/setting"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/routers/api"
