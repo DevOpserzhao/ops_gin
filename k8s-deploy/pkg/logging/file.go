@@ -12,7 +12,9 @@ import (
 func getLogFilePath() string {
 	return fmt.Sprintf("%s%s", setting.AppSetting.RuntimeRootPath, setting.AppSetting.LogSavePath)
 }
-
+func GetLogFilePath() string {
+	return fmt.Sprintf("%s%s", setting.AppSetting.RuntimeRootPath, setting.AppSetting.LogSavePath)
+}
 func getLogFileName() string {
 	return fmt.Sprintf("%s%s.%s",
 		setting.AppSetting.LogSaveName,
@@ -20,7 +22,13 @@ func getLogFileName() string {
 		setting.AppSetting.LogFileExt,
 	)
 }
-
+func GetAcessLogFileName() string {
+	return fmt.Sprintf("%s%s.%s",
+		"gin_acces",
+		time.Now().Format(setting.AppSetting.TimeFormat),
+		setting.AppSetting.LogFileExt,
+	)
+}
 func openLogFile(fileName, filePath string) (*os.File, error) {
 	dir, err := os.Getwd()
 	if err != nil {

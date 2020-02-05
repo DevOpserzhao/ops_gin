@@ -11,8 +11,8 @@ import (
 type Level int
 
 var (
-	F *os.File
-
+	F                  *os.File
+	F_A                *os.File
 	DefaultPrefix      = ""
 	DefaultCallerDepth = 2
 
@@ -39,6 +39,16 @@ func Setup() {
 	}
 
 	logger = log.New(F, DefaultPrefix, log.LstdFlags)
+}
+func SetupAecss() {
+	var err error
+	filePath := getLogFilePath()
+	fileName := GetAcessLogFileName()
+	F_A, err = openLogFile(fileName, filePath)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 }
 
 func Debug(v ...interface{}) {
