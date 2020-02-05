@@ -13,10 +13,27 @@ import (
 
 func init() {
 	setting.Setup()
-	logging.Setup()
 	logging.SetupAecss()
 	clientgo.Setup()
 }
+
+
+// @title Gin swagger
+// @version 1.0
+// @description Gin swagger 示例项目
+
+// @contact.name zxf
+// @contact.url
+// @contact.email
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:8080
+
+
+
+
 func main() {
 	//router := routers.InitRouter()
 	//
