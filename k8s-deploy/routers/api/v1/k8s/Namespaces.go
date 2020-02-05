@@ -12,11 +12,14 @@ import (
 func GetNamespacesall(c *gin.Context) {
 
 	Namespacesall, _ := client_go.GetNameSpaces()
+	count, _ := client_go.GetNameSpacesCount()
 	data := make(map[string]interface{})
 	//fmt.Printf("na%v", Namespacesall)
 
 	data["namespaces"] = Namespacesall
 
+	fmt.Printf("k8s namespace num %v", count)
+	data["count"] = count
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  200,
@@ -32,9 +35,6 @@ func GetNamespaces(c *gin.Context) {
 	fmt.Printf("k8s namespace%v", name)
 	data := make(map[string]interface{})
 
-	count, _ := client_go.GetNameSpacesCount()
-	fmt.Printf("k8s namespace num %v", count)
-	data["count"] = count
 	exists, err := client_go.ExistByNameSpace(name)
 	fmt.Print(exists)
 

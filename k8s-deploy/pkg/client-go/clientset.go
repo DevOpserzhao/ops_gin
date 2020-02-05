@@ -122,13 +122,33 @@ func ExistByNameSpace(NameSpace string) (bool, error) {
 	return false, nil
 }
 
-func GetDeploymentsAll(NameSpace string) (*appv1.DeploymentList, error) {
-	deployments, err := ClientSetConn.AppsV1().Deployments(NameSpace).List(metav1.ListOptions{})
+//func GetDeploymentsAll(NameSpace string) (*appv1.DeploymentList, error) {
+//	deployments, err := ClientSetConn.AppsV1().Deployments(NameSpace).List(metav1.ListOptions{})
+//	if err != nil {
+//		panic(err)
+//	}
+//
+//	return deployments, err
+//}
+func GetDeploymentsAll(NameSpace string) (data []string, err error) {
+	deploymentsClientList, err := ClientSetConn.AppsV1().Deployments(NameSpace).List(metav1.ListOptions{})
 	if err != nil {
 		panic(err)
 	}
+	for _, deployments := range deploymentsClientList.Items {
+		fmt.Printf("Name: %s, Replicas: %d, CreateTime: %s\n", deployments.ObjectMeta.Name, *deployments.Spec.Replicas, deployments.ObjectMeta.CreationTimestamp)
+		data = append(data, deployments.ObjectMeta.Name)
+	}
 
-	return deployments, err
+	return data, err
+}
+func GetDeploymentsAllCount(NameSpace string) (data int, err error) {
+	deploymentsClientList, err := ClientSetConn.AppsV1().Deployments(NameSpace).List(metav1.ListOptions{})
+	if err != nil {
+		panic(err)
+	}
+	data = len(deploymentsClientList.Items)
+	return data, err
 }
 
 func GetDeployment(NameSpace string, DeploymentName string) (*appv1.Deployment, error) {

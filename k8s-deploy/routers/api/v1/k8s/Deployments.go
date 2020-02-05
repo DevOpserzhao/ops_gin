@@ -19,10 +19,17 @@ func Deployments(c *gin.Context) {
 	data := make(map[string]interface{})
 	arg := c.Query("namespace")
 	name := com.StrTo(arg).String()
-	Namespace, _ := client_go.GetDeploymentsAll(name)
+	fmt.Printf(name)
 
+	Namespace, _ := client_go.GetDeploymentsAll(name)
+	Count, _ := client_go.GetDeploymentsAllCount(name)
+	if name == "" {
+		name = "all"
+	}
+	data["Count"] = Count
+	data["namespace"] = name
 	data["Deployments"] = Namespace
-	appD.Response(http.StatusOK, 5000, data)
+	appD.Response(http.StatusOK, 200, data)
 
 }
 
