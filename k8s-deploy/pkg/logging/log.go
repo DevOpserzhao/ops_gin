@@ -43,7 +43,7 @@ func Setup() {
 func SetupAecss() {
 	var err error
 	filePath := getLogFilePath()
-	fileName := GetAcessLogFileName()
+	fileName := getAcessLogFileName()
 	F_A, err = openLogFile(fileName, filePath)
 	if err != nil {
 		log.Fatalln(err)

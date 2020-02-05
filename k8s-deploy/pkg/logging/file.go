@@ -22,7 +22,7 @@ func getLogFileName() string {
 		setting.AppSetting.LogFileExt,
 	)
 }
-func GetAcessLogFileName() string {
+func getAcessLogFileName() string {
 	return fmt.Sprintf("%s%s.%s",
 		"gin_acces",
 		time.Now().Format(setting.AppSetting.TimeFormat),
