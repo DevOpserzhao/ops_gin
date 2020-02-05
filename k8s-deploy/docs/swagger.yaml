@@ -1,0 +1,39 @@
+host: localhost:8080
+info:
+  contact:
+    name: zxf
+  description: Gin swagger k8s运维平台
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Gin swagger
+  version: "1.0"
+paths:
+  /Namespaces:
+    get:
+      parameters:
+      - description: namespace
+        in: query
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      summary: Deployments
+  /auth:
+    get:
+      parameters:
+      - description: userName
+        in: query
+        name: username
+        required: true
+        type: string
+      - description: password
+        in: query
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      summary: Get Auth
+swagger: "2.0"
