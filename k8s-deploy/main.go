@@ -17,10 +17,9 @@ func init() {
 	clientgo.Setup()
 }
 
-
 // @title Gin swagger
 // @version 1.0
-// @description Gin swagger 示例项目
+// @description Gin swagger k8s运维平台
 
 // @contact.name zxf
 // @contact.url
@@ -30,9 +29,6 @@ func init() {
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
 // @host localhost:8080
-
-
-
 
 func main() {
 	//router := routers.InitRouter()

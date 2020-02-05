@@ -9,6 +9,10 @@ import (
 	"net/http"
 )
 
+// @Summary Deployments
+// @Produce  json
+// @Param username query string true "namespace"
+// @Router /Namespaces [get]
 func Deployments(c *gin.Context) {
 	appD := app.Gin{C: c}
 	//DeploymentName := com.StrTo(c.Param("id")).String()
