@@ -13,7 +13,7 @@ func GetNamespacesall(c *gin.Context) {
 
 	Namespacesall, _ := client_go.GetNameSpaces()
 	data := make(map[string]interface{})
-	fmt.Printf("na%v", Namespacesall)
+	//fmt.Printf("na%v", Namespacesall)
 
 	data["namespaces"] = Namespacesall
 
@@ -32,8 +32,12 @@ func GetNamespaces(c *gin.Context) {
 	fmt.Printf("k8s namespace%v", name)
 	data := make(map[string]interface{})
 
+	count, _ := client_go.GetNameSpacesCount()
+	fmt.Printf("k8s namespace num %v", count)
+	data["count"] = count
 	exists, err := client_go.ExistByNameSpace(name)
 	fmt.Print(exists)
+
 	if err != nil {
 		data["namespaces"] = nil
 		appN.Response(http.StatusInternalServerError, 5000, data)

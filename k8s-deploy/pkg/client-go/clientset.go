@@ -52,13 +52,52 @@ func Setup() {
 //
 //}
 
-func GetNameSpaces() (*apiv1.NamespaceList, error) {
+//func GetNameSpaces() (*apiv1.NamespaceList, error) {
+//	ns, err := ClientSetConn.CoreV1().Namespaces().List(metav1.ListOptions{})
+//	if err != nil {
+//		panic(err)
+//	}
+//	nss := ns.Items
+//	fmt.Printf("\nThere are %d namespaces in cluster\n", len(nss))
+//
+//	var datas []map[string]interface{}
+//	for _, ns := range nss {
+//		fmt.Printf("zxf Name: %s \n", ns.ObjectMeta.Name)
+//		datas = append(datas,ns)
+//
+//
+//	}
+//
+//	return ns, err
+//
+//}
+
+func GetNameSpaces() (data []string, err error) {
 	ns, err := ClientSetConn.CoreV1().Namespaces().List(metav1.ListOptions{})
 	if err != nil {
 		panic(err)
 	}
-	return ns, err
+	nss := ns.Items
+	//fmt.Printf("\nThere are %d namespaces in cluster\n", len(nss))
 
+	for _, ns := range nss {
+		fmt.Printf("zxf Name: %s \n", ns.ObjectMeta.Name)
+		data = append(data, ns.ObjectMeta.Name)
+
+	}
+	fmt.Printf("\nThere are %v\n", data)
+	return data, nil
+}
+
+func GetNameSpacesCount() (data int32, err error) {
+	ns, err := ClientSetConn.CoreV1().Namespaces().List(metav1.ListOptions{})
+	if err != nil {
+		panic(err)
+	}
+	nss := ns.Items
+	fmt.Printf("\nThere are %d namespaces in cluster\n", len(nss))
+	data = int32(len(nss))
+	return data, nil
 }
 
 func GetNameSpace(NameSpace string) (*apiv1.Namespace, error) {

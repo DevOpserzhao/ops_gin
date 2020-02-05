@@ -58,7 +58,7 @@ func SetDeployment(c *gin.Context) {
 		appD.Response(http.StatusOK, 5000, "Update failed")
 	}
 
-	data["Deployment"] = "Namespace"
-	appD.Response(http.StatusOK, 5000, data)
+	data["Deployment"] = "更新成功"
+	appD.Response(http.StatusOK, 5001, data)
 
 }
