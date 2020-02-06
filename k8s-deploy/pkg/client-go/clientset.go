@@ -101,9 +101,10 @@ func GetNameSpacesCount() (data int32, err error) {
 }
 
 func GetNameSpace(NameSpace string) (*apiv1.Namespace, error) {
+	fmt.Printf("基础库获取的参数=%v\n", NameSpace)
 	ns, err := ClientSetConn.CoreV1().Namespaces().Get(NameSpace, metav1.GetOptions{})
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 
 	return ns, err
@@ -136,7 +137,7 @@ func GetDeploymentsAll(NameSpace string) (data []string, err error) {
 		panic(err)
 	}
 	for _, deployments := range deploymentsClientList.Items {
-		fmt.Printf("Name: %s, Replicas: %d, CreateTime: %s\n", deployments.ObjectMeta.Name, *deployments.Spec.Replicas, deployments.ObjectMeta.CreationTimestamp)
+		//fmt.Printf("Name: %s, Replicas: %d, CreateTime: %s\n", deployments.ObjectMeta.Name, *deployments.Spec.Replicas, deployments.ObjectMeta.CreationTimestamp)
 		data = append(data, deployments.ObjectMeta.Name)
 	}
 
@@ -158,6 +159,16 @@ func GetDeployment(NameSpace string, DeploymentName string) (*appv1.Deployment, 
 	}
 
 	return deployments, err
+}
+
+func ExistByDeployment(NameSpace string, DeploymentName string) (bool, error) {
+	_, err := ClientSetConn.AppsV1().Deployments(NameSpace).Get(DeploymentName, metav1.GetOptions{})
+	if err != nil {
+		//panic(err)
+		return false, err
+	}
+
+	return true, err
 }
 
 func int32Ptr(i int32) *int32 { return &i }

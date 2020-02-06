@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/app"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/client-go"
+	"github.com/DevOpserzhao/ops_gin/k8s-deploy/service/k8s_service"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
 	"net/http"
@@ -32,10 +33,12 @@ func GetNamespaces(c *gin.Context) {
 	appN := app.Gin{C: c}
 	name := com.StrTo(c.Param("id")).String()
 
-	fmt.Printf("k8s namespace%v", name)
+	fmt.Printf("url 传参k8s namespace=%v\n", name)
 	data := make(map[string]interface{})
+	NamespaceService := k8s_service.Deployment{NameSpaceName: name}
 
-	exists, err := client_go.ExistByNameSpace(name)
+	exists, err := NamespaceService.ExistByNameSpace()
+
 	fmt.Print(exists)
 
 	if err != nil {
@@ -44,14 +47,16 @@ func GetNamespaces(c *gin.Context) {
 		return
 	}
 
-	if !exists {
-		appN.Response(http.StatusOK, 222, nil)
+	//if exists == {
+	//	data["namespaces"] = nil
+	//	appN.Response(http.StatusInternalServerError, 5000, data)
+	//
+	//
+	//	return
+	//}
+	Namespace, _ := NamespaceService.GetNameSpace()
 
-		return
-	}
-	Namespace, _ := client_go.GetNameSpace(name)
-
-	fmt.Printf("na%v", Namespace)
+	//fmt.Printf("na%v", Namespace)
 
 	data["namespaces"] = Namespace
 
