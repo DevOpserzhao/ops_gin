@@ -1,12 +1,9 @@
 package article_service
 
 import (
-	"encoding/json"
+	"database/sql"
 	"fmt"
 	"github.com/DevOpserzhao/ops_gin/first/models"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/gredis"
-	"github.com/DevOpserzhao/ops_gin/first/pkg/logging"
-	"github.com/DevOpserzhao/ops_gin/first/service/cache_service"
 )
 
 type Article struct {
@@ -22,6 +19,11 @@ type Article struct {
 
 	PageNum  int
 	PageSize int
+}
+
+func (a *Article) StatsDB() sql.DBStats {
+	return models.StatsDB()
+
 }
 
 func (a *Article) Add() error {
@@ -78,7 +80,14 @@ func (a *Article) Edit() error {
 //	return article, nil
 //}
 
-func (a *Article) Get() (*models.Article, error) {
+type transformedArticle struct {
+	TagID int    `json:"tag_id" gorm:"index"`
+	Tag   string `json:"tag"`
+
+	Title string `json:"title"`
+}
+
+func (a *Article) Get() (interface{}, error) {
 	//var cacheArticle *models.Article
 	//
 	//cache := cache_service.Article{ID: a.ID}
@@ -95,6 +104,8 @@ func (a *Article) Get() (*models.Article, error) {
 
 	article, err := models.GetArticle(a.ID)
 
+	_article := transformedArticle{TagID: article.TagID, Tag: article.Tag.Name, Title: article.Title}
+
 	fmt.Printf("%v", article)
 
 	if err != nil {
@@ -102,39 +113,64 @@ func (a *Article) Get() (*models.Article, error) {
 	}
 
 	//gredis.Set(key, article, 3600)
-	return article, nil
+	return _article, nil
 }
 
-func (a *Article) GetAll() ([]*models.Article, error) {
+//func (a *Article) GetAll() ([]*models.Article, error) {
+//	var (
+//		articles, cacheArticles []*models.Article
+//	)
+//
+//	cache := cache_service.Article{
+//		TagID: a.TagID,
+//		State: a.State,
+//
+//		PageNum:  a.PageNum,
+//		PageSize: a.PageSize,
+//	}
+//	key := cache.GetArticlesKey()
+//	if gredis.Exists(key) {
+//		data, err := gredis.Get(key)
+//		if err != nil {
+//			logging.Info(err)
+//		} else {
+//			json.Unmarshal(data, &cacheArticles)
+//			return cacheArticles, nil
+//		}
+//	}
+//
+//	articles, err := models.GetArticles(a.PageNum, a.PageSize, a.getMaps())
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	gredis.Set(key, articles, 3600)
+//	return articles, nil
+//}
+
+//func (a *Article) GetAll() ([] transformedArticle, error) {
+func (a *Article) GetAll() (map[string]interface{}, error) {
+
+	data := make(map[string]interface{})
 	var (
-		articles, cacheArticles []*models.Article
+		articles []*models.Article
 	)
 
-	cache := cache_service.Article{
-		TagID: a.TagID,
-		State: a.State,
-
-		PageNum:  a.PageNum,
-		PageSize: a.PageSize,
-	}
-	key := cache.GetArticlesKey()
-	if gredis.Exists(key) {
-		data, err := gredis.Get(key)
-		if err != nil {
-			logging.Info(err)
-		} else {
-			json.Unmarshal(data, &cacheArticles)
-			return cacheArticles, nil
-		}
-	}
+	var _articles []transformedArticle
 
 	articles, err := models.GetArticles(a.PageNum, a.PageSize, a.getMaps())
+
+	for _, item := range articles {
+
+		_articles = append(_articles, transformedArticle{TagID: item.TagID, Tag: item.Tag.Name, Title: item.Title})
+	}
+
 	if err != nil {
 		return nil, err
 	}
-
-	gredis.Set(key, articles, 3600)
-	return articles, nil
+	data["articles"] = _articles
+	data["StatsDB"] = a.StatsDB()
+	return data, nil
 }
 
 func (a *Article) Delete() error {

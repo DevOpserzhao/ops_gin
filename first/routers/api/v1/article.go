@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"fmt"
 	"github.com/DevOpserzhao/ops_gin/first/pkg/app"
 	"github.com/DevOpserzhao/ops_gin/first/pkg/e"
 	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
@@ -133,6 +134,8 @@ type AddArticleForm struct {
 // @Failure 500 {object} app.Response
 // @Router /api/v1/articles [post]
 func AddArticle(c *gin.Context) {
+
+	fmt.Print("进入了")
 	var (
 		appG = app.Gin{C: c}
 		form AddArticleForm
@@ -146,6 +149,7 @@ func AddArticle(c *gin.Context) {
 
 	tagService := tag_service.Tag{ID: form.TagID}
 	exists, err := tagService.ExistByID()
+	fmt.Printf("赵先飞%v\n", exists)
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, e.ERROR_EXIST_TAG_FAIL, nil)
 		return

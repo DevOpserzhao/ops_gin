@@ -1,6 +1,7 @@
 package models
 
 import (
+	"database/sql"
 	"fmt"
 	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
 	"github.com/jinzhu/gorm"
@@ -42,9 +43,14 @@ func Setup() {
 	db.Callback().Delete().Replace("gorm:delete", deleteCallback)
 	db.DB().SetMaxIdleConns(10)
 	db.DB().SetMaxOpenConns(100)
+	fmt.Printf("%v", db.DB().Stats())
 }
 func CloseDB() {
 	defer db.Close()
+}
+
+func StatsDB() sql.DBStats {
+	return db.DB().Stats()
 }
 
 // updateTimeStampForCreateCallback will set `CreatedOn`, `ModifiedOn` when creating

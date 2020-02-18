@@ -3,7 +3,6 @@ package routers
 import (
 	"fmt"
 	_ "github.com/DevOpserzhao/ops_gin/k8s-deploy/docs"
-	"github.com/DevOpserzhao/ops_gin/k8s-deploy/middleware/jwt"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/logging"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/setting"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/routers/api"
@@ -49,7 +48,7 @@ func InitRouter() *gin.Engine {
 	//r.StaticFS("/upload/images", http.Dir(upload.GetImageFullPath()))
 
 	apiv1 := r.Group("/api/v1")
-	apiv1.Use(jwt.JWT())
+	//apiv1.Use(jwt.JWT())
 
 	{
 

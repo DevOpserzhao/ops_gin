@@ -29,6 +29,7 @@ func InitRouter() *gin.Engine {
 	gin.SetMode(setting.ServerSetting.RunMode)
 
 	r.GET("/auth", api.GetAuth)
+	r.GET("/db", api.GormStats)
 	r.POST("/upload", api.UploadImage)
 	r.StaticFS("/upload/images", http.Dir(upload.GetImageFullPath()))
 
