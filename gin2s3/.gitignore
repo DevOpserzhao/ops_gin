@@ -16,8 +16,8 @@
 .idea/
 .DS_Store
 gin2s3
+runtime/*
 public/*
 .aws/*
-runtime/*
 !runtime/qrcode/bg.jpg
 !runtime/fonts
