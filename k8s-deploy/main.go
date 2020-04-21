@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	clientgo "github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/client-go"
 	"github.com/DevOpserzhao/ops_gin/k8s-deploy/pkg/logging"
@@ -12,9 +13,13 @@ import (
 )
 
 func init() {
+
+	env := flag.String("env", "binary", "k8s or binary")
+	flag.Parse()
+
 	setting.Setup()
 	logging.SetupAecss()
-	clientgo.Setup()
+	clientgo.Setup(*env)
 }
 
 // @title Gin swagger
