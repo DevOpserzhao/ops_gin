@@ -19,6 +19,6 @@ gin2s3
 public/*
 .aws/*
 runtime/*
-.kube／*
+.kube/*
 !runtime/qrcode/bg.jpg
 !runtime/fonts
