@@ -22,3 +22,4 @@ runtime/*
 .kube/*
 !runtime/qrcode/bg.jpg
 !runtime/fonts
+/go-oss-uploads/.idea/
