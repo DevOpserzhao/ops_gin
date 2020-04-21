@@ -40,14 +40,14 @@ func upload(c *gin.Context) {
 	// Upload the file's body to S3 bucket as an object with the key being the
 	// same as the filename.
 	s3_re := &s3manager.UploadOutput{}
-
+	path := "/media/" + filename
 	s3_re, err = uploader.Upload(&s3manager.UploadInput{
 		Bucket: aws.String(bucket),
 
 		// Can also use the `filepath` standard library package to modify the
 		// filename as need for an S3 object key. Such as turning absolute path
 		// to a relative path.
-		Key: aws.String(filename),
+		Key: aws.String(path),
 		//Key: aws.String(key),
 		// The file to be uploaded. io.ReadSeeker is preferred as the Uploader
 		// will be able to optimize memory when uploading large content. io.Reader
