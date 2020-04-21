@@ -7,8 +7,6 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/gin-gonic/gin"
-	"io"
-	"log"
 	"net/http"
 	"os"
 )
@@ -21,16 +19,6 @@ func upload(c *gin.Context) {
 	}
 
 	filename := header.Filename
-	out, err := os.Create("public/" + filename)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer out.Close()
-
-	_, err = io.Copy(out, file)
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	//filepath := "http://localhost:8080/file/" + filename
 	//c.JSON(http.StatusOK, gin.H{"filepath": filepath})
