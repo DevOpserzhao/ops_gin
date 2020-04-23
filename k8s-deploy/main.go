@@ -14,7 +14,7 @@ import (
 
 func init() {
 
-	env := flag.String("env", "binary", "k8s or binary")
+	env := flag.String("ENV_OPTS", "binary", "k8s or binary")
 	flag.Parse()
 
 	setting.Setup()

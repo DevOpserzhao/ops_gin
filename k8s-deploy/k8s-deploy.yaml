@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8sdeploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8sdeploy
+  template:
+    metadata:
+      labels:
+        app: k8sdeploy
+    spec:
+      containers:
+        - name: k8sdeploy
+          image: registry.cn-chengdu.aliyuncs.com/go_ops/k8s-deploy:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8sdeploy
+spec:
+  ports:
+    - port: 80
+      targetPort: 8000
+      name: k8sdeploy
+  selector:
+    app: k8sdeploy
+  type: NodePort

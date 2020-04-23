@@ -19,7 +19,7 @@ gin2s3
 public/*
 .aws/*
 runtime/*
-.kube/*
+k8s-deploy/.kube/*
 !runtime/qrcode/bg.jpg
 !runtime/fonts
 /go-oss-uploads/.idea/
