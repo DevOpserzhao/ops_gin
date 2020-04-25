@@ -16,8 +16,12 @@ spec:
         - name: k8sdeploy
           image: registry.cn-chengdu.aliyuncs.com/go_ops/k8s-deploy:v1
           imagePullPolicy: IfNotPresent
+          env:
+            - name: ENV_OPTS
+              value: -ENV_OPTS=k8s
           ports:
             - containerPort: 8000
+      serviceAccountName: k8s-root
 ---
 apiVersion: v1
 kind: Service

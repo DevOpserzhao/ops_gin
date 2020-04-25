@@ -20,6 +20,6 @@ COPY --from=builder /root/myapp/k8s .
 COPY --from=builder /root/myapp/conf/app.ini ./conf/app.ini
 COPY --from=builder /root/myapp/conf/app.ini ./conf/app.ini
 
-ENV ENV_OPTS="-ENV_OPTS=k8s"
+ENV ENV_OPTS=""
 EXPOSE 8000
-ENTRYPOINT ["./k8s"]
+ENTRYPOINT ["sh", "-c", "./k8s $ENV_OPTS"]
