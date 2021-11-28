@@ -22,6 +22,7 @@ type App struct {
 	TimeFormat  string
 }
 
+//全局变量
 var AppSetting = &App{}
 
 type Server struct {
@@ -54,6 +55,7 @@ type Redis struct {
 
 var RedisSetting = &Redis{}
 
+//通过setup函数给全局变量赋值
 func Setup() {
 	Cfg, err := ini.Load("conf/app.ini")
 	if err != nil {

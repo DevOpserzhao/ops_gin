@@ -6,7 +6,6 @@ import (
 	"github.com/DevOpserzhao/ops_gin/first/pkg/setting"
 	"github.com/DevOpserzhao/ops_gin/first/pkg/upload"
 	"github.com/DevOpserzhao/ops_gin/first/routers/api"
-	"github.com/DevOpserzhao/ops_gin/first/routers/api/k8s"
 	v1 "github.com/DevOpserzhao/ops_gin/first/routers/api/v1"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -57,11 +56,11 @@ func InitRouter() *gin.Engine {
 		//删除指定文章
 		apiv1.DELETE("/articles/:id", v1.DeleteArticle)
 
-		apiv1.GET("/k8s/Namespaces", k8s.GetNamespacesall)
-		apiv1.GET("/k8s/Namespaces/:id", k8s.GetNamespaces)
-		apiv1.GET("/k8s/Deployment", k8s.Deployments)
-		apiv1.GET("/k8s/Deployment/:id", k8s.Deployment)
-		apiv1.PUT("/k8s/Deployment/:id", k8s.SetDeployment)
+		//apiv1.GET("/k8s/Namespaces", k8s.GetNamespacesall)
+		//apiv1.GET("/k8s/Namespaces/:id", k8s.GetNamespaces)
+		//apiv1.GET("/k8s/Deployment", k8s.Deployments)
+		//apiv1.GET("/k8s/Deployment/:id", k8s.Deployment)
+		//apiv1.PUT("/k8s/Deployment/:id", k8s.SetDeployment)
 
 	}
 
